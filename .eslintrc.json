@@ -1,5 +1,13 @@
 {
+  "ignorePatterns": ["vite.config.js"],
   "plugins": ["import"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
+  },
   "extends": ["eslint:recommended", "plugin:import/errors", "prettier"],
   "env": {
     "es6": true,
