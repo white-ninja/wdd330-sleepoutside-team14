@@ -1,4 +1,4 @@
-import { getLocalStorage } from './utils.mjs';
+import { getImageUrl, getLocalStorage } from './utils.mjs';
 
 function renderCartContents() {
   const storedCart = getLocalStorage('so-cart');
@@ -12,12 +12,13 @@ function renderCartContents() {
 }
 
 function cartItemTemplate(item) {
+  const imageUrl = getImageUrl(item.Image);
+  const imageContent = imageUrl
+    ? `<img src="${imageUrl}" alt="${item.Name}" />`
+    : '<span>Image unavailable</span>';
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
-    <img
-      src="${item.Image}"
-      alt="${item.Name}"
-    />
+    ${imageContent}
   </a>
   <a href="#">
     <h2 class="card__name">${item.Name}</h2>

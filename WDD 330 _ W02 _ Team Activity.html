@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<!-- saved from url=(0060)https://byui-cse.github.io/wdd330-ww-course/week02/team.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WDD 330 | W02 | Team Activity</title>
+  <link rel="apple-touch-icon" sizes="180x180" href="https://byui-cse.github.io/cse-ww-program/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="https://byui-cse.github.io/cse-ww-program/favicon-32x32.png">
+  <link rel="icon" type="image/png" href="https://byui-cse.github.io/cse-ww-program/favicon-16x16.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="./WDD 330 _ W02 _ Team Activity_files/css2" rel="stylesheet">
+  <link rel="stylesheet" href="./WDD 330 _ W02 _ Team Activity_files/course.css">
+  <link rel="stylesheet" href="./WDD 330 _ W02 _ Team Activity_files/vs2015.min.css">
+
+  <script src="./WDD 330 _ W02 _ Team Activity_files/displayDateTimes.js.download" defer=""></script>
+  <script type="text/javascript" src="./WDD 330 _ W02 _ Team Activity_files/dbc89d251a7e931d_complete.js.download" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <div class="page">
+      <h1>WDD 330<span id="coursetitle">: Web Frontend Development II</span></h1>
+      <img src="./WDD 330 _ W02 _ Team Activity_files/byui-logo.svg" alt="BYU-I logo" class="logo">
+    </div>
+  </header>
+  <main class="page">
+    <nav>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/">Home</a></span>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/week01/">W1</a></span>
+      <span class="active"><a href="https://byui-cse.github.io/wdd330-ww-course/week02/">W2</a></span>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/week03/">W3</a></span>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/week04/">W4</a></span>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/week05/">W5</a></span>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/week06/">W6</a></span>
+      <span><a href="https://byui-cse.github.io/wdd330-ww-course/week07/">W7</a></span>
+    </nav>
+
+    <h2>W02 Team Activity: Dynamic Product Detail Page</h2>
+
+    <h3>Overview</h3>
+    <p>
+      This activity will review the tools introduced last week, and begin
+      the process of making the application scalable by adding dynamically
+      generated product detail pages, and more organization using ES Modules.
+    </p>
+    <h3>Activity Instructions</h3>
+    <p>
+      Complete the following assignment as a team. Designate one team member
+      as the "main driver" and collaborate on their copy of the code.
+      Everyone on the team should be actively engaged in writing the code
+      and contributing to the solution. Once the solution is working, make
+      sure that everyone on the team gets a copy of the code. Each week let
+      someone else be the "main driver" of the coding.
+    </p>
+    <div class="callout info">
+      <p>
+        There are many spots where code examples have been given. To get the most out of this activity, do not look at
+        the examples until your
+        team has given that section a try. Then after you look at the example, resist the temptation to copy/paste. Use
+        the examples to make
+        corrections or to help the team move forward. Do not just use them to get it done.
+      </p>
+    </div>
+
+    <h3>Core Requirements</h3>
+    <h4 class="step">Begin the Task – Trello Work</h4>
+    <ol>
+      <li>In the synchronous meeting, the driver should visit the team's copy of the project Trello
+        board.</li>
+      <li>Add each of the attending team members to the
+        <code>Team Activity W02: Dynamic product detail pages</code> card.
+      </li>
+      <li>Move it to the <code>"Doing"</code> list in Trello.</li>
+      <li>Read the details of the card together.</li>
+    </ol>
+    <h4 class="step">GitHub Branch – Driver</h4>
+    <ol>
+      <li><strong>Pull</strong> any changes from the team GitHub project before proceeding.</li>
+      <li>Create a new branch named <code><em>driverinitials</em>--team2</code> where
+        <em>driverinitials</em> is the driver's initials.
+      </li>
+    </ol>
+
+    <h4 class="step">File Structure</h4>
+    <p>
+      There is currently an HTML file for each of the four tent products in the <strong>product_pages</strong>
+      directory. This organization is fine when there are only a few products. The plan is to expand the inventory and
+      therefore, this webpage per product model does not work.</p>
+    <p>The product pages all follow a similar layout and appearance so there should be only one HTML file that
+      dynamically loads the details about the requested product.
+    </p>
+    <p>In addition, as a web application grows, using <strong>ES Modules</strong> becomes increasingly important. ES
+      Modules offer better organization and code reusability, which are crucial aspects for managing complex software
+      projects.
+    </p>
+    <div class="callout info">
+      <p>Remember that the words <em>directory</em> and <em>folder</em> have essentially the same meaning. Directory
+        is the more accurate term for file systems while folder 📂 refers to the graphical metaphor that is
+        generally accepted because it is highly related to the term file.</p>
+    </div>
+
+    <div class="callout error">
+      <h4>IMPORTANT!</h4>
+      <p>
+        Make sure to work in the <code>src</code> directory when completing this activity and <strong>NOT</strong> the
+        <strong>dist</strong> directory! The build directory will get erased and completely rebuilt each time the
+        <code>npm run build</code> is run. Think of <code>dist</code> as the production version of your code.
+        <strong>src</strong> is your working directory. You should not need to run <code>npm run build</code> very
+        often, like once a week after you have merged some branches.
+      </p>
+      <p>When you run <code>npm run start</code> it will use the files in <code>src</code> to build the project.</p>
+    </div>
+
+    <ol>
+      <li>In the <strong>product_pages</strong> directory, copy one of the tent product pages by opening it in the
+        editor and
+        then use <br>
+        <code>File&gt; Save As...</code> and name the file <strong>index.html</strong> saving it in the
+        <strong>product_pages</strong> directory.
+      </li>
+      <li>Add a new file, a module named <strong>ProductDetails.mjs</strong> in the <strong>js</strong>
+        directory.<br> This script file will be programmed to contain the code to dynamically produce the product detail
+        pages.
+      </li>
+
+      <li>It's very likely that other parts of the application will need
+        to make requests for product data. That functionality has
+        already been exposed in the <strong>ProductData.mjs</strong> module.
+      </li>
+      <li>Other general functionality will need to be shared between parts of the application.
+        Notice that there is already an <strong>utils.mjs</strong> module that will hold that
+        utility functionality.
+        <div class="callout info">
+          <p>
+            The goal will be to eventually have a one-to-one relationship with HTML views/pages and JS modules. Then any
+            functionality that needs to be shared between modules can be placed in a utility module.
+          </p>
+        </div>
+      </li>
+    </ol>
+
+    <h4 class="step">Review <strong>ProductData.mjs</strong></h4>
+    <p>Open up the <strong>ProductData.mjs</strong> module file. Note a few things:</p>
+    <details>
+      <summary>
+        Click for example code (<strong>ProductData.mjs</strong>)
+      </summary>
+
+      <pre><code class="js hljs language-javascript"><span class="hljs-keyword">function</span> <span class="hljs-title function_">convertToJson</span>(<span class="hljs-params">res</span>) {
+  <span class="hljs-keyword">if</span> (res.<span class="hljs-property">ok</span>) {
+    <span class="hljs-keyword">return</span> res.<span class="hljs-title function_">json</span>();
+  } <span class="hljs-keyword">else</span> {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Error</span>(<span class="hljs-string">'Bad Response'</span>);
+  }
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> <span class="hljs-keyword">class</span> <span class="hljs-title class_">ProductData</span>  {
+  <span class="hljs-title function_">constructor</span>(<span class="hljs-params">category</span>) {
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">category</span> = category;
+    <span class="hljs-variable language_">this</span>.<span class="hljs-property">path</span> = <span class="hljs-string">`../json/<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.category}</span>.json`</span>;
+  }
+  <span class="hljs-title function_">getData</span>(<span class="hljs-params"></span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-title function_">fetch</span>(<span class="hljs-variable language_">this</span>.<span class="hljs-property">path</span>)
+      .<span class="hljs-title function_">then</span>(convertToJson).<span class="hljs-title function_">then</span>(<span class="hljs-function">(<span class="hljs-params">data</span>) =&gt;</span> data);
+  }
+  <span class="hljs-keyword">async</span> <span class="hljs-title function_">findProductById</span>(<span class="hljs-params">id</span>) {
+    <span class="hljs-keyword">const</span> products = <span class="hljs-keyword">await</span> <span class="hljs-variable language_">this</span>.<span class="hljs-title function_">getData</span>()
+    <span class="hljs-keyword">return</span> products.<span class="hljs-title function_">find</span>(<span class="hljs-function">(<span class="hljs-params">item</span>) =&gt;</span> item.<span class="hljs-property">Id</span> === id);
+  }
+}</code></pre>
+
+    </details>
+    <ol>
+      <li>
+        In order to make the module portable and easy to use, it uses a class to expose all the public facing code in
+        the module. The class is called <code>ProductData</code>, and it is the default export.
+      </li>
+      <li>
+        The <code>ProductsDetails</code> class will be used for more than just tents. When a category name, for example,
+        '<code>tents</code>', is passed to the class, the class will store it and use it to build a path to the correct
+        JSON file.
+        <pre><code class="js hljs language-javascript"><span class="hljs-variable language_">this</span>.<span class="hljs-property">path</span> = <span class="hljs-string">`../json/<span class="hljs-subst">${<span class="hljs-variable language_">this</span>.category}</span>.json`</span>;</code></pre>
+      </li>
+      <li>
+        Notice the <code>getData()</code> method compared to the <code>findProductById()</code> method. The
+        <code>getData()</code> method uses just
+        promises and <code>.then()</code>, the <code>findProductById()</code> method uses <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function" target="_blank">async/await</a>.
+
+        <div class="callout info">
+          <p>In general, the async/await syntax is considered to be easier to read (and write) than the typical
+            <code>.then()</code> based promise handling.
+          </p>
+        </div>
+
+      </li>
+      <li>If the syntax <code>(data) =&gt; data</code> is confusing, spend some time reading about <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions" target="_blank">arrow functions</a>. This short callback function can be rewritten to be like a more
+        traditional anonymous function declaration:
+        <pre><code class="js hljs language-javascript"><span class="hljs-keyword">function</span>(<span class="hljs-params">data</span>) { <span class="hljs-keyword">return</span> data; }</code></pre>
+      </li>
+      <li>
+        The callback <code>(item) =&gt; item.Id === id</code>. Another way to write that could be:
+        <pre><code class="js hljs language-javascript"><span class="hljs-keyword">function</span>(<span class="hljs-params">item</span>) { <span class="hljs-keyword">return</span> item.<span class="hljs-property">Id</span> === id; }</code></pre>
+        <div class="callout info">
+          <p>
+            It is very common to see short functions that just return some
+            value or expression written using the arrow function syntax.
+          </p>
+        </div>
+      </li>
+      <li>Open up the <strong>product.js</strong> file and note that the <strong>ProductData.mjs</strong>
+        module is imported.
+        <pre><code class="lang-js hljs language-javascript"><span class="hljs-keyword">import</span> <span class="hljs-title class_">ProductData</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./ProductData.js'</span>;</code></pre>
+        And then an instance of the ProductData class is then created.
+        <pre><code class="lang-js hljs language-javascript"><span class="hljs-keyword">const</span> dataSource = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProductData</span>(<span class="hljs-string">'tents'</span>);</code></pre>
+
+        <div class="callout info">
+          <p>Remember that to use ES Modules in JavaScript a <code>type="module"</code> attribute must be included in
+            the
+            HTML <code>script</code> tag.</p>
+        </div>
+      </li>
+    </ol>
+
+    <h4 class="step">URL Parameters</h4>
+
+    <p>There needs to be some way of passing in the product to show the details. A common way to do this
+      is through a <a href="https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams" target="_blank">URL
+        Parameter</a> or query string. The following example HTML anchor element (hyperlink) has the product ID embedded
+      into the link and named "<code>product</code>". When the page loads it will have access to that information.</p>
+    <pre><code class="HTML hljs language-HTML"><span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"product_pages/index.html?product=880RR"</span> &gt;</span></code></pre>
+
+    <p>The following statements:</p>
+    <ul>
+      <li>get the query string part of the current URL (the part after the <code>?</code>)</li>
+      <li>create a <code>URLSearchParams</code> object making it convenient to work with the parameters</li>
+      <li>retrieves that value of the named parameter, in this case <code>product</code></li>
+    </ul>
+
+    <pre><code class="JavaScript hljs language-JavaScript"><span class="hljs-keyword">const</span> queryString = <span class="hljs-variable language_">window</span>.<span class="hljs-property">location</span>.<span class="hljs-property">search</span>;
+<span class="hljs-keyword">const</span> urlParams = <span class="hljs-keyword">new</span> <span class="hljs-title class_">URLSearchParams</span>(queryString);
+<span class="hljs-keyword">const</span> product = urlParams.<span class="hljs-title function_">get</span>(<span class="hljs-string">'product'</span>)</code></pre>
+    <ol>
+      <li>
+
+        Use those lines to create a new function in the <strong>utils.mjs</strong> file called
+        <code>getParam(param)</code>
+        that you can use to return a parameter from the URL when requested.
+      </li>
+      <li>Import this new <code>getParam</code> function into <strong>product.js</strong>.</li>
+      <li>Open <strong>/index.html</strong> and change the link to the first product page from
+        <code>href="product_pages/marmot-ajax-3.html"</code> to
+        <code>href="product_pages/?product=880RR"</code>.
+        <div class="callout info">
+          <p>
+            Where did the <code>880RR</code> come from? Look in the <strong>json/tents.json</strong> file and note that
+            each record has an id value. <code>880RR</code> just happens to be the id for the first tent.
+          </p>
+        </div>
+      </li>
+      <li>Test the <code>getParam</code> function in <strong>product.js</strong> to see test if the
+        <code>productId</code> displays in the URL when a product is clicked. This would be a good time to test out the
+        <code>findProductById</code> method as well.
+        <pre><code class="js hljs language-javascript"><span class="hljs-keyword">import</span> { setLocalStorage, getParam } <span class="hljs-keyword">from</span> <span class="hljs-string">'./utils.mjs'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ProductData</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./ProductData.mjs'</span>;
+
+<span class="hljs-keyword">const</span> dataSource = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProductData</span>(<span class="hljs-string">'tents'</span>);
+<span class="hljs-keyword">const</span> productId = <span class="hljs-title function_">getParam</span>(<span class="hljs-string">'product'</span>);
+
+<span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(dataSource.<span class="hljs-title function_">findProductById</span>(productId));</code></pre>
+      </li>
+
+      <li>
+        You should also update the rest of the links in
+        <strong>/index.html</strong> to match the first one. You can look up
+        the IDs in the <code>tents.json</code> file.
+      </li>
+    </ol>
+
+
+    <h4 class="step">ProductDetails.mjs</h4>
+    <ol>
+      <li>
+        Open your new file <strong>ProductDetails.mjs</strong> which located in the <strong>js</strong> directory.
+      </li>
+      <li>Model the <strong>ProductDetails.mjs</strong> file similarly to the
+        <strong>ProductData.mjs</strong> file by placing the public methods in a class.<br> The following
+        methods are recommended:
+
+        <ol class="check">
+          <li>
+            <code>constructor()</code>: This is recommended for classes.
+          </li>
+          <li>
+            <code>init()</code>: There are a few things that need to happen before the class can be used. Some will
+            happen in the constructor, automatically. Other Others need to be controlled and will be placed in this
+            <code>init</code> method.
+          </li>
+          <li>
+            <code>addProductToCart()</code>: This is the function that is currently in <strong>product.js</strong>.<br>
+            Move it here and note that <strong>product.js</strong> does not need to import <code>setLocalStorage</code>
+            from <strong>utils.mjs</strong> anymore.
+          </li>
+          <li>
+            <code>renderProductDetails()</code>: Method to generate or populate the HTML to display the product details.
+          </li>
+        </ol>
+      </li>
+      <li>
+        It will be nice for the product to keep track of important information about itself. For example,
+        <pre><code class="js hljs language-javascript"><span class="hljs-title function_">constructor</span>(<span class="hljs-params">productId, dataSource</span>){
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">productId</span> = productId;
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">product</span> = {};
+  <span class="hljs-variable language_">this</span>.<span class="hljs-property">dataSource</span> = dataSource;
+}</code></pre>
+        With that information the product will know which id it has, it will have a source to get the information it
+        needs when the time
+        comes, and will have a place to store the retrieved details.
+      </li>
+      <li>Refactor the <strong>product.js</strong> code to pull everything from the last few steps together.
+        <ul class="check">
+          <li>Import the functions that are needed in this module from <strong>utils.mjs</strong>,
+            <strong>ProductData.mjs</strong>, and <strong>ProductDetails.mjs</strong>? You may need to come back to add
+            these as you review the other requirements.
+          </li>
+          <li>Get the <code>product</code> parameter, the product id, from the URL using the helper function
+            <code>getParam</code>
+          </li>
+          <li>Create an instance of the <code>ProductData</code> data class with the URL it should use to look for
+            products.</li>
+          <li>Use both of these variables to create an instance of the <code>ProductDetails</code> class</li>
+          <li>Call the <code>init()</code> method using the class instance to finish setting everything up.</li>
+        </ul>
+        Once everything is refactored the file should look something like this:
+        <pre><code class="js hljs language-javascript"><span class="hljs-keyword">import</span> { getParam } <span class="hljs-keyword">from</span> <span class="hljs-string">'./utils.mjs'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ProductData</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./ProductData.mjs'</span>;
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">ProductDetails</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./ProductDetails.mjs'</span>;
+
+
+<span class="hljs-keyword">const</span> productId = <span class="hljs-title function_">getParam</span>(<span class="hljs-string">'product'</span>);
+<span class="hljs-keyword">const</span> dataSource = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProductData</span>(<span class="hljs-string">'tents'</span>);
+
+<span class="hljs-keyword">const</span> product = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ProductDetails</span>(productId, dataSource);
+product.<span class="hljs-title function_">init</span>();</code></pre>
+      </li>
+    </ol>
+
+    <h4 class="step">Finish It Up!</h4>
+    <ol>
+
+      <li>Develop the rest of the methods in the <code>ProductDetails</code> class to make product selection work.
+        <ul class="check">
+          <li>
+            <code>init()</code>: This class initializer method needs to fetch product details using the provided data
+            source and render the details. In addition, this method needs to handle the user clicking the 'Add to Cart'
+            button.<br> Use the following comments as a guide in the development of this method.
+            <pre><code class="js hljs language-javascript"><span class="hljs-keyword">async</span> <span class="hljs-title function_">init</span>(<span class="hljs-params"></span>) {
+<span class="hljs-comment">// use the datasource to get the details for the current product. findProductById will return a promise! use await or .then() to process it</span>
+<span class="hljs-comment">// the product details are needed before rendering the HTML</span>
+<span class="hljs-comment">// once the HTML is rendered, add a listener to the Add to Cart button</span>
+<span class="hljs-comment">// Notice the .bind(this). This callback will not work if the bind(this) is missing. Review the readings from this week on 'this' to understand why.</span>
+<span class="hljs-variable language_">document</span>.<span class="hljs-title function_">getElementById</span>(<span class="hljs-string">'addToCart'</span>)
+  .<span class="hljs-title function_">addEventListener</span>(<span class="hljs-string">'click'</span>, <span class="hljs-variable language_">this</span>.<span class="hljs-property">addToCart</span>.<span class="hljs-title function_">bind</span>(<span class="hljs-variable language_">this</span>));
+}</code></pre>
+          </li>
+          <li>
+            <code>addProductToCart()</code>: Move this function from <strong>product.js</strong>. Make any changes
+            necessary to make it work. This method will be called from within the <code>init()</code> method.
+          </li>
+          <li>
+            <code>renderProductDetails()</code>: Use the HTML in the <strong>/product_pages/index.html</strong> as a
+            guide to the HTML that needs to be generated. This method will also be called from within the
+            <code>init()</code> method.
+          </li>
+        </ul>
+      </li>
+    </ol>
+
+    <h3>Example Solution</h3>
+    <p>In this team activity, you are expected to look over a solution from the instructor, to compare your approach
+      to one provided. </p>
+    <div class="callout warning">
+      <p>
+        Do <strong>NOT</strong> open the solution example until you have worked through this
+        activity as a team for at least one hour. At the end of the hour, if
+        you are still struggling with some of the core requirements, you are
+        welcome to view the example solution and use it to help you
+        complete your own code.
+      </p>
+
+      <details>
+        <summary>Example Solution</summary>
+        <p>The example solution can be found in the <strong>src</strong> directory: <a href="https://github.com/byui-cse/wdd330-sleepoutside/tree/week2-Team" target="_blank" rel="noreferrer">WDD
+            330 Sleep Outside Repository <strong>week2-Team</strong> branch</a>.</p>
+      </details>
+
+    </div>
+
+    <h3>Make a Pull Request</h3>
+    <ol>
+      <li>Complete as much as you can on this activity.</li>
+      <li>Review the example solution.</li>
+      <li>Get your code working.</li>
+      <li>Lint and format your code before committing.</li>
+      <li><strong>Driver</strong>: Commit and push changes to the team project repository.</li>
+      <li><strong>Driver</strong>: Submit a pull request for this driver branch.</li>
+      <li>Review the pull request as a team.</li>
+      <li>Close the request and merge the branch back into the <code>Main</code>.</li>
+      <li>Someone move the Trello task card to the <code>"Done"</code> list.</li>
+    </ol>
+    <h3>Submission</h3>
+    <p>
+      When you have finished this activity, fill out the assessment
+      in Canvas. You are welcome to complete any additional parts of this
+      activity by yourself or with others after your meeting before
+      submitting the assessment.
+    </p>
+
+  </main>
+
+  <footer>
+    <p>Copyright © Brigham Young University-Idaho | All rights reserved</p>
+  </footer>
+  <script src="./WDD 330 _ W02 _ Team Activity_files/highlight.min.js.download"></script>
+  <script>hljs.highlightAll();</script>
+
+
+
+<div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:44 (11 Nov)<br>
+    UTC-0: 14:44 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:45 (11 Nov)<br>
+    UTC-0: 14:45 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:46 (11 Nov)<br>
+    UTC-0: 14:46 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:47 (11 Nov)<br>
+    UTC-0: 14:47 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:48 (11 Nov)<br>
+    UTC-0: 14:48 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:49 (11 Nov)<br>
+    UTC-0: 14:49 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:50 (11 Nov)<br>
+    UTC-0: 14:50 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:52 (11 Nov)<br>
+    UTC-0: 14:52 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:53 (11 Nov)<br>
+    UTC-0: 14:53 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:53 (11 Nov)<br>
+    UTC-0: 14:53 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:54 (11 Nov)<br>
+    UTC-0: 14:54 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:55 (11 Nov)<br>
+    UTC-0: 14:55 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:56 (11 Nov)<br>
+    UTC-0: 14:56 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:57 (11 Nov)<br>
+    UTC-0: 14:57 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:58 (11 Nov)<br>
+    UTC-0: 14:58 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 08:59 (11 Nov)<br>
+    UTC-0: 14:59 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:00 (11 Nov)<br>
+    UTC-0: 15:00 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:01 (11 Nov)<br>
+    UTC-0: 15:01 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:02 (11 Nov)<br>
+    UTC-0: 15:02 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:03 (11 Nov)<br>
+    UTC-0: 15:03 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:04 (11 Nov)<br>
+    UTC-0: 15:04 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:05 (11 Nov)<br>
+    UTC-0: 15:05 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:06 (11 Nov)<br>
+    UTC-0: 15:06 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:07 (11 Nov)<br>
+    UTC-0: 15:07 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:08 (11 Nov)<br>
+    UTC-0: 15:08 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:09 (11 Nov)<br>
+    UTC-0: 15:09 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:10 (11 Nov)<br>
+    UTC-0: 15:10 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:12 (11 Nov)<br>
+    UTC-0: 15:12 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:13 (11 Nov)<br>
+    UTC-0: 15:13 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:14 (11 Nov)<br>
+    UTC-0: 15:14 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:14 (11 Nov)<br>
+    UTC-0: 15:14 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:15 (11 Nov)<br>
+    UTC-0: 15:15 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:16 (11 Nov)<br>
+    UTC-0: 15:16 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:17 (11 Nov)<br>
+    UTC-0: 15:17 (11 Nov)</p>
+  </div><div style="position: fixed; bottom: 1rem; right: 1rem; background-color: rgb(255, 195, 40); color: rgb(0, 0, 0); padding: 0.5rem; border: 1px solid rgba(0, 0, 0, 0.1); border-radius: 0.5rem; z-index: 1000; text-align: center; font-family: monospace;">
+    <p>Time: 09:19 (11 Nov)<br>
+    UTC-0: 15:19 (11 Nov)</p>
+  </div></body></html>
