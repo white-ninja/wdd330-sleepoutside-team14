@@ -15,7 +15,11 @@ function addProductToCart(product) {
 }
 // add to cart button event handler
 async function addToCartHandler(e) {
-  const product = await dataSource.findProductById(e.target.dataset.id);
+  const productId = e.currentTarget.dataset.id;
+  const product = await dataSource.findProductById(productId);
+  if (!product) {
+    throw new Error(`Product not found: ${productId}`);
+  }
   addProductToCart(product);
 }
 

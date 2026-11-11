@@ -1,20 +1,22 @@
-function convertToJson(res) {
-  if (res.ok) {
-    return res.json();
-  } else {
-    throw new Error("Bad Response");
-  }
-}
+import tents from '../json/tents.json';
+import sleepingBags from '../json/sleeping-bags.json';
+import backpacks from '../json/backpacks.json';
 
 export default class ProductData {
   constructor(category) {
     this.category = category;
-    this.path = `../json/${this.category}.json`;
+    this.products = {
+      tents,
+      'sleeping-bags': sleepingBags,
+      backpacks,
+    }[category];
+
+    if (!this.products) {
+      throw new Error(`Unknown product category: ${category}`);
+    }
   }
   getData() {
-    return fetch(this.path)
-      .then(convertToJson)
-      .then((data) => data);
+    return Promise.resolve(this.products);
   }
   async findProductById(id) {
     const products = await this.getData();
