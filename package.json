@@ -6,16 +6,16 @@
   "scripts": {
     "start": "vite",
     "build": "vite build --emptyOutDir",
-    "lint": "eslint *.js src/**/*.js",
+    "lint": "eslint src/**/*.js",
     "format": "prettier --ignore-path ./.gitignore --write \"./**/*.{html,json,js,ts,css}\"",
     "test": "jest"
   },
   "author": "Shane Thompson",
   "license": "ISC",
   "devDependencies": {
-    "eslint": "^4.0.0",
+    "eslint": "^7.32.0",
     "eslint-config-prettier": "^6.15.0",
-    "eslint-plugin-import": "^1.14.0",
+    "eslint-plugin-import": "^2.32.0",
     "jest": "^30.5.2",
     "prettier": "^3.2.5",
     "vite": "^8.3.5"
