@@ -21,6 +21,12 @@
 - `npm run build` to build final files when you are ready to turn in.
 - `npm run preview` serves the production build locally after running `npm run build`.
 
+### Deployment
+
+The site deploys to GitHub Pages from the `main` branch through the GitHub Actions workflow. In the repository settings, set **Pages > Build and deployment > Source** to **GitHub Actions**. The workflow runs lint, tests, and a production build before publishing `dist`.
+
+For local production builds, run `npm run build` and `npm run preview`. The GitHub Actions build automatically uses the repository's Pages base path.
+
 ---
 
 _BYU-Pathway Worldwide improves lives through access to spiritually based, online affordable higher education. Its mission is to develop disciples of Jesus Christ who are leaders in their homes, the Church, and their communities._

@@ -206,10 +206,24 @@ button {
 /* Start cart list card styles */
 .cart-card {
   display: grid;
-  grid-template-columns: 25% auto 15%;
+  grid-template-columns: 25% auto 15% 2rem;
   font-size: var(--small-font);
   /* max-height: 120px; */
   align-items: center;
+}
+
+.cart-card__remove {
+  grid-column: 4;
+  grid-row: 1;
+  width: 2rem;
+  height: 2rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--light-grey);
+  background: white;
+  color: var(--dark-grey);
+  font-size: 1.2rem;
+  line-height: 1;
 }
 
 .cart-card__image {
@@ -253,7 +267,7 @@ button {
 
   .cart-card {
     font-size: inherit;
-    grid-template-columns: 150px auto 15%;
+    grid-template-columns: 150px auto 15% 2rem;
   }
 }
 

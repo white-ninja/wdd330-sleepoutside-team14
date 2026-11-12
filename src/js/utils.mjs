@@ -16,14 +16,23 @@ export function setLocalStorage(key, data) {
   localStorage.setItem(key, JSON.stringify(data));
 }
 
-export function getImageUrl(imagePath) {
+export function getImageUrl(imagePath, baseUrl = '/') {
   if (typeof imagePath !== 'string' || !imagePath) {
     return null;
   }
 
-  return imagePath.startsWith('../images/')
-    ? imagePath.replace('../images/', '/images/')
-    : imagePath;
+  const imageRelativePath = imagePath.startsWith('../images/')
+    ? imagePath.replace('../images/', 'images/')
+    : imagePath.startsWith('/images/')
+      ? imagePath.slice(1)
+      : null;
+
+  if (!imageRelativePath) {
+    return imagePath;
+  }
+
+  const normalizedBase = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
+  return `${normalizedBase}${imageRelativePath}`;
 }
 
 export function renderListWithTemplate(
