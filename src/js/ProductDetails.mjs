@@ -56,6 +56,13 @@ export default class ProductDetails {
 
     const image = document.getElementById('productImage');
     const imageUrl = getImageUrl(this.product.Image);
+    image.addEventListener(
+      'error',
+      () => {
+        image.hidden = true;
+      },
+      { once: true },
+    );
     if (imageUrl) {
       image.src = imageUrl;
     } else {

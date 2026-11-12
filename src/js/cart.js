@@ -9,6 +9,15 @@ function renderCartContents() {
       : [];
   const htmlItems = cartItems.map((item) => cartItemTemplate(item));
   document.querySelector('.product-list').innerHTML = htmlItems.join('');
+  document.querySelectorAll('.cart-card__image img').forEach((image) => {
+    image.addEventListener(
+      'error',
+      () => {
+        image.replaceWith(document.createTextNode('Image unavailable'));
+      },
+      { once: true },
+    );
+  });
 }
 
 function cartItemTemplate(item) {
