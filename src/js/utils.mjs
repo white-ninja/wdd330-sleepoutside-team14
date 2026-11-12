@@ -1,9 +1,3 @@
-const imageUrls = import.meta.glob('../images/**/*', {
-  eager: true,
-  import: 'default',
-  query: '?url',
-});
-
 // wrapper for querySelector...returns matching element
 export function qs(selector, parent = document) {
   return parent.querySelector(selector);
@@ -27,8 +21,23 @@ export function getImageUrl(imagePath) {
     return null;
   }
 
-  const imageUrl = imageUrls[imagePath];
-  return imagePath.startsWith('../images/') ? imageUrl || null : imagePath;
+  return imagePath.startsWith('../images/')
+    ? imagePath.replace('../images/', '/images/')
+    : imagePath;
+}
+
+export function renderListWithTemplate(
+  templateFn,
+  parentElement,
+  list,
+  position = 'afterbegin',
+  clear = false,
+) {
+  if (clear) {
+    parentElement.innerHTML = '';
+  }
+  const htmlStrings = list.map(templateFn);
+  parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
 
 // set a listener for both touchend and click

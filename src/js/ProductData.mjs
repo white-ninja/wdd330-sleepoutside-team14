@@ -1,23 +1,20 @@
-import tents from '../json/tents.json';
-import sleepingBags from '../json/sleeping-bags.json';
-import backpacks from '../json/backpacks.json';
+function convertToJson(response) {
+  if (!response.ok) {
+    throw new Error(`Unable to load ${response.url}: ${response.status}`);
+  }
+  return response.json();
+}
 
 export default class ProductData {
   constructor(category) {
     this.category = category;
-    this.products = {
-      tents,
-      'sleeping-bags': sleepingBags,
-      backpacks,
-    }[category];
+    this.path = `/json/${this.category}.json`;
+  }
 
-    if (!this.products) {
-      throw new Error(`Unknown product category: ${category}`);
-    }
-  }
   getData() {
-    return Promise.resolve(this.products);
+    return fetch(this.path).then(convertToJson);
   }
+
   async findProductById(id) {
     const products = await this.getData();
     return products.find((item) => item.Id === id);
