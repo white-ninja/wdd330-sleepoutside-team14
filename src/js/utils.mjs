@@ -49,6 +49,46 @@ export function renderListWithTemplate(
   parentElement.insertAdjacentHTML(position, htmlStrings.join(''));
 }
 
+export function renderWithTemplate(template, parentElement, data, callback) {
+  parentElement.innerHTML = template;
+  if (callback) {
+    callback(data);
+  }
+}
+
+export async function loadTemplate(path) {
+  const response = await fetch(path);
+  if (!response.ok) {
+    throw new Error(
+      `Unable to load template at ${path}: ${response.status} ${response.statusText}`,
+    );
+  }
+  return response.text();
+}
+
+export async function loadHeaderFooter(baseUrl = '/', callback) {
+  const headerElement = qs('#main-header');
+  const footerElement = qs('#main-footer');
+  if (!headerElement || !footerElement) {
+    throw new Error('The page is missing a header or footer placeholder.');
+  }
+
+  const [headerTemplate, footerTemplate] = await Promise.all([
+    loadTemplate(`${baseUrl}partials/header.html`),
+    loadTemplate(`${baseUrl}partials/footer.html`),
+  ]);
+  const replaceBaseUrl = (template) =>
+    template.replace(/%BASE_URL%/g, baseUrl);
+
+  renderWithTemplate(
+    replaceBaseUrl(headerTemplate),
+    headerElement,
+    null,
+    callback,
+  );
+  renderWithTemplate(replaceBaseUrl(footerTemplate), footerElement);
+}
+
 // set a listener for both touchend and click
 export function setClick(selector, callback) {
   qs(selector).addEventListener('touchend', (event) => {
