@@ -1,4 +1,4 @@
-import { getImageUrl, getLocalStorage, setLocalStorage } from './utils.mjs';
+import { getLocalStorage, setLocalStorage } from './utils.mjs';
 
 export default class ProductDetails {
   constructor(productId, dataSource) {
@@ -19,7 +19,15 @@ export default class ProductDetails {
       return;
     }
 
-    this.product = await this.dataSource.findProductById(this.productId);
+    try {
+      this.product = await this.dataSource.findProductById(this.productId);
+    } catch (error) {
+      console.error('Unable to load product details:', error);
+      this.renderUnavailableProduct(
+        'Product details could not be loaded. Please try again later.',
+      );
+      return;
+    }
     if (!this.product) {
       this.renderUnavailableProduct('The selected product could not be found.');
       return;
@@ -37,10 +45,7 @@ export default class ProductDetails {
       : storedCart
         ? [storedCart]
         : [];
-    cart.push({
-      ...this.product,
-      Image: getImageUrl(this.product.Image),
-    });
+    cart.push(this.product);
     setLocalStorage('so-cart', cart);
   }
 
@@ -55,7 +60,7 @@ export default class ProductDetails {
       this.product.NameWithoutBrand;
 
     const image = document.getElementById('productImage');
-    const imageUrl = getImageUrl(this.product.Image);
+    const imageUrl = this.product.Images?.PrimaryLarge;
     image.addEventListener(
       'error',
       () => {

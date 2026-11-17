@@ -27,6 +27,10 @@ The site deploys to GitHub Pages from the `main` branch through the GitHub Actio
 
 For local production builds, run `npm run build` and `npm run preview`. The GitHub Actions build automatically uses the repository's Pages base path.
 
+### Product catalog API
+
+The home page links to dynamic listings for tents, backpacks, sleeping bags, and hammocks. Product listings and detail pages use the WDD 330 backend API. For local development, copy `src/.env.sample` to `src/.env` and set `VITE_SERVER_URL` to the backend URL. The public course API URL is used as a fallback when that variable is not set, including in the GitHub Pages build.
+
 ---
 
 _BYU-Pathway Worldwide improves lives through access to spiritually based, online affordable higher education. Its mission is to develop disciples of Jesus Christ who are leaders in their homes, the Church, and their communities._

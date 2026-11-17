@@ -20,6 +20,10 @@ export default defineConfig({
         cart: resolve(projectDirectory, 'src/cart/index.html'),
         checkout: resolve(projectDirectory, 'src/checkout/index.html'),
         product: resolve(projectDirectory, 'src/product_pages/index.html'),
+        productListing: resolve(
+          projectDirectory,
+          'src/product_listing/index.html',
+        ),
       },
     },
   },
