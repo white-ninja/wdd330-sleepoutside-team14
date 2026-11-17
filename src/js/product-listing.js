@@ -1,8 +1,14 @@
+import Alert from './Alert.js';
 import ProductData from './ProductData.mjs';
 import ProductList from './ProductList.mjs';
 import { getParam, loadHeaderFooter, qs } from './utils.mjs';
 
 loadHeaderFooter(import.meta.env.BASE_URL);
+new Alert(qs('main'), import.meta.env.BASE_URL)
+  .init()
+  // Surface JSON or network failures without blocking the product list.
+  // eslint-disable-next-line no-console
+  .catch((error) => console.error('Unable to load alerts:', error));
 
 const categoryLabels = {
   tents: 'Tents',
