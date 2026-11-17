@@ -6,7 +6,9 @@ import {
 } from './utils.mjs';
 
 function cartItemTemplate(item) {
-  const imageUrl = getImageUrl(item.Image, import.meta.env.BASE_URL);
+  const imageUrl =
+    item.Images?.PrimaryMedium ||
+    getImageUrl(item.Image, import.meta.env.BASE_URL);
   const imageContent = imageUrl
     ? `<img src="${imageUrl}" alt="${item.Name}" />`
     : '<span>Image unavailable</span>';

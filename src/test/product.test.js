@@ -4,6 +4,7 @@ import {
 	loadTemplate,
 	renderWithTemplate,
 } from '../js/utils.mjs';
+import ProductData from '../js/ProductData.mjs';
 
 afterEach(() => {
 	jest.restoreAllMocks();
@@ -63,6 +64,45 @@ describe('shared templates', () => {
 		});
 		await expect(loadTemplate('/partials/missing.html')).rejects.toThrow(
 			'404 Not Found',
+		);
+	});
+});
+
+describe('ProductData API', () => {
+	it('loads products for the requested category from the API result', async () => {
+		const products = [{ Id: '20CXG' }];
+		jest.spyOn(global, 'fetch').mockResolvedValue({
+			ok: true,
+			json: async () => ({ Result: products }),
+		});
+		const dataSource = new ProductData('https://api.example.test');
+
+		await expect(dataSource.getData('sleeping-bags')).resolves.toBe(products);
+		expect(global.fetch).toHaveBeenCalledWith(
+			'https://api.example.test/products/search/sleeping-bags',
+		);
+	});
+
+	it('fetches a product by ID and reports an empty API result', async () => {
+		const product = { Id: '20CXG' };
+		const fetchMock = jest.spyOn(global, 'fetch');
+		fetchMock.mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({ Result: product }),
+		});
+		const dataSource = new ProductData('https://api.example.test/');
+
+		await expect(dataSource.findProductById('20CXG')).resolves.toBe(product);
+		expect(fetchMock).toHaveBeenCalledWith(
+			'https://api.example.test/product/20cxg/',
+		);
+
+		fetchMock.mockResolvedValueOnce({
+			ok: true,
+			json: async () => ({ Result: null }),
+		});
+		await expect(dataSource.findProductById('unknown')).rejects.toThrow(
+			'returned no product',
 		);
 	});
 });

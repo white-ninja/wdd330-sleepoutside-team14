@@ -1,13 +1,13 @@
 import { getImageUrl, renderListWithTemplate } from './utils.mjs';
 
 function productCardTemplate(product) {
-  const imageUrl = getImageUrl(product.Image, import.meta.env.BASE_URL);
+  const imageUrl = product.Images?.PrimaryMedium;
   const fallbackImageUrl = getImageUrl(
     '/images/noun_Tent_2517.svg',
     import.meta.env.BASE_URL,
   );
   return `<li class="product-card">
-    <a href="product_pages/index.html?product=${product.Id}">
+    <a href="../product_pages/index.html?product=${encodeURIComponent(product.Id)}">
       <img src="${imageUrl || fallbackImageUrl}" alt="${product.Name}" />
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
@@ -24,8 +24,14 @@ export default class ProductList {
   }
 
   async init() {
-    const products = await this.dataSource.getData();
-    this.renderList(products);
+    try {
+      const products = await this.dataSource.getData(this.category);
+      this.renderList(products);
+    } catch (error) {
+      console.error('Unable to load products:', error);
+      this.listElement.innerHTML =
+        '<li class="product-list__message" role="alert">Products could not be loaded. Please try again later.</li>';
+    }
   }
 
   renderList(list) {

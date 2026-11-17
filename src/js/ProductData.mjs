@@ -1,3 +1,5 @@
+const defaultBaseURL = 'https://wdd330-backend-osp8.onrender.com/';
+
 function convertToJson(response) {
   if (!response.ok) {
     throw new Error(`Unable to load ${response.url}: ${response.status}`);
@@ -6,17 +8,30 @@ function convertToJson(response) {
 }
 
 export default class ProductData {
-  constructor(category) {
-    this.category = category;
-    this.path = `${import.meta.env.BASE_URL}json/${this.category}.json`;
+  constructor(baseURL = defaultBaseURL) {
+    const apiURL = baseURL || defaultBaseURL;
+    this.baseURL = apiURL.endsWith('/') ? apiURL : `${apiURL}/`;
   }
 
-  getData() {
-    return fetch(this.path).then(convertToJson);
+  async getData(category) {
+    const response = await fetch(
+      `${this.baseURL}products/search/${encodeURIComponent(category)}`,
+    );
+    const data = await convertToJson(response);
+    if (!Array.isArray(data.Result)) {
+      throw new Error(`The product search for ${category} returned no results.`);
+    }
+    return data.Result;
   }
 
   async findProductById(id) {
-    const products = await this.getData();
-    return products.find((item) => item.Id === id);
+    const response = await fetch(
+      `${this.baseURL}product/${encodeURIComponent(id.toLowerCase())}/`,
+    );
+    const data = await convertToJson(response);
+    if (!data.Result) {
+      throw new Error(`The product lookup for ${id} returned no product.`);
+    }
+    return data.Result;
   }
 }

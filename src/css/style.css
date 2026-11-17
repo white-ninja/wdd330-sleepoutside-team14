@@ -133,6 +133,54 @@ button {
 
 /* End cart icon styles */
 
+.product-categories {
+  padding: 1.5rem 1rem;
+}
+
+.product-categories h2 {
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.category-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  list-style: none;
+}
+
+.category-list a {
+  display: flex;
+  min-height: 150px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  border: 1px solid var(--light-grey);
+  border-radius: 0.5rem;
+  color: var(--dark-grey);
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.category-list a:hover,
+.category-list a:focus-visible {
+  border-color: var(--secondary-color);
+  box-shadow: 0 2px 8px #0002;
+}
+
+.category-list img {
+  width: 80px;
+  height: 80px;
+}
+
+.product-list__message {
+  grid-column: 1 / -1;
+  padding: 1rem;
+  list-style: none;
+}
+
 .mission {
   position: absolute;
   top: 1rem;
