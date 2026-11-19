@@ -6,8 +6,17 @@ const category = getParam("category");
 const title = document.querySelector(".title");
 
 if (title) {
-  title.textContent =
-    `Top Products: ${category}`;
+  const formattedCategory = category
+  .split("-")
+  .map(
+    word =>
+      word.charAt(0).toUpperCase() +
+      word.slice(1)
+  )
+  .join(" ");
+
+title.textContent =
+  `Top Products: ${formattedCategory}`;
 }
 
 // Create data source
