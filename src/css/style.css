@@ -261,3 +261,17 @@ footer {
   font-size: var(--small-font);
   padding: 1em;
 }
+.discount-badge {
+  display: inline-block;
+  background-color: #d32f2f;
+  color: white;
+  padding: 0.5rem 0.75rem;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-top: 0.5rem;
+}
+
+.product-price {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
