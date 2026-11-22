@@ -91,17 +91,22 @@ export default class CheckoutProcess {
   }
 
   async checkout(form) {
-    // Convert form data into an order object
-    const order = formDataToJSON(form);
+  const order = formDataToJSON(form);
 
-    // Add the remaining order information
-    order.orderDate = new Date().toISOString();
-    order.items = this.packageItems();
-    order.orderTotal = this.orderTotal;
-    order.shipping = this.shipping;
-    order.tax = this.tax;
+  order.orderDate = new Date().toISOString();
+  order.items = this.packageItems();
+  order.orderTotal = this.orderTotal;
+  order.shipping = this.shipping;
+  order.tax = this.tax;
 
-    // Send the order to the server
-    return await this.externalServices.checkout(order);
-  }
+  const response =
+    await this.externalServices.checkout(order);
+
+  localStorage.removeItem(this.key);
+
+  window.location.href =
+    "/checkout/success.html";
+
+  return response;
+}
 }

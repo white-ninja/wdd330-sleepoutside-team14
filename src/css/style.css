@@ -376,3 +376,20 @@ footer {
 .order-summary h2 {
   margin-top: 1rem;
 }
+.alert-message {
+  background-color: #ffe5e5;
+  border: 1px solid #cc0000;
+  color: #990000;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alert-message button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}

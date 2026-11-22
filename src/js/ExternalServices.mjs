@@ -2,14 +2,18 @@
 const defaultBaseURL = 'https://wdd330-backend-osp8.onrender.com/';
 
 async function convertToJson(response) {
-  if (!response.ok) {
-    throw new Error(
-      `Unable to load ${response.url}: ${response.status}`,
-    );
+  const jsonResponse = await response.json();
+
+  if (response.ok) {
+    return jsonResponse;
   }
 
-  return response.json();
+  throw {
+    name: "servicesError",
+    message: jsonResponse,
+  };
 }
+
 
 export default class ExternalServices {
   constructor(baseURL = defaultBaseURL) {
