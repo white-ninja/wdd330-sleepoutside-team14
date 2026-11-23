@@ -21,7 +21,13 @@ export default class ExternalServices extends ProductData {
 
     const responseBody = await response.json();
     if (!response.ok) {
-      throw new ServiceError(responseBody, response.status);
+      console.error('Backend error details:', data);
+      throw {
+        name: 'servicesError',
+        message: `Checkout failed (${response.status}): ${JSON.stringify(data)}`,
+        responseBody: data,
+        status: response.status,
+      };
     }
 
     return responseBody;
