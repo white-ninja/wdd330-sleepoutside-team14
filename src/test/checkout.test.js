@@ -6,6 +6,20 @@ afterEach(() => {
 });
 
 describe('ExternalServices checkout', () => {
+  it('uses the original product ID casing for product lookups', async () => {
+    const product = { Id: '15KKP' };
+    const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue({
+      ok: true,
+      json: async () => ({ Result: product }),
+    });
+    const services = new ExternalServices('https://api.example.test');
+
+    await expect(services.findProductById('15KKP')).resolves.toBe(product);
+    expect(fetchMock).toHaveBeenCalledWith(
+      'https://api.example.test/product/15KKP/',
+    );
+  });
+
   it('sends the order and returns the parsed success response', async () => {
     const result = { orderId: 'test-order' };
     const fetchMock = jest.spyOn(global, 'fetch').mockResolvedValue({
