@@ -1,0 +1,36 @@
+# WDD 330 – Final Individual Project Brainstorm
+
+Student: Emmanuel Adejare Ariyo  
+Course: WDD 330 – Web Frontend Development II
+
+1. FarmSense – Farm Weather and Production Planner
+
+A web application that helps farmers monitor weather conditions for selected farm locations and review historical rainfall and temperature patterns to support better farm planning.
+
+Third-party APIs:
+- Open-Meteo API – weather forecasts and historical weather data.
+- NASA POWER API – historical meteorological and solar data.
+
+2. FarmMargin – Farm Cost and Profitability Planner
+
+A web application that enables farmers and agribusiness owners to record production expenses, estimate revenue, calculate break-even points, and evaluate potential profitability. It will also incorporate currency exchange rates and economic indicators.
+
+Third-party APIs:
+- Frankfurter API – current and historical currency exchange rates.
+- World Bank Indicators API – economic and agricultural development indicators.
+
+3. AgriMarket – Agricultural Production Intelligence
+
+A web application that allows users to explore agricultural production statistics across countries and commodities, compare production trends, and research potential agribusiness opportunities.
+
+Third-party APIs:
+- FAOSTAT API – agricultural production and commodity statistics.
+- World Bank Indicators API – economic and development indicators.
+
+4. AgriTrade – Agricultural Import and Export Explorer
+
+A web application that enables agricultural businesses to explore international trade statistics for agricultural commodities, compare countries, and examine import and export trends to support market research.
+
+Third-party APIs:
+- UN Comtrade API – international merchandise trade statistics.
+- FAOSTAT API – agricultural production and commodity statistics.

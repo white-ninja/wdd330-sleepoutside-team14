@@ -1,0 +1,36 @@
+WDD 330 – Final Individual Project Brainstorm
+
+Student: Emmanuel Adejare Ariyo  
+Course: WDD 330 – Web Frontend Development II
+
+1. FarmMargin – Farm Cost and Profitability Planner
+
+A web application that enables farmers and agribusiness owners to record production expenses, estimate revenue, calculate break-even points, and evaluate the potential profitability of their farming activities.
+
+Third-party APIs:
+- Frankfurter API – provides current and historical currency exchange rates.
+- World Bank Indicators API – provides economic and development indicators.
+
+2. AgriMarket – Agricultural Production Intelligence
+
+A web application that allows users to explore agricultural production statistics across countries and commodities, compare production trends, and research potential agribusiness opportunities.
+
+Third-party APIs:
+- FAOSTAT API – provides agricultural production and commodity statistics.
+- World Bank Indicators API – provides country-level economic and development indicators.
+
+3. AgriTrade – Agricultural Import and Export Explorer
+
+A web application that enables agricultural businesses to explore international trade statistics for agricultural commodities, compare countries, and examine import and export trends to support market research.
+
+Third-party APIs:
+- UN Comtrade API – provides international merchandise trade statistics, including agricultural commodity imports and exports.
+- FAOSTAT API – provides agricultural production and commodity statistics.
+
+4. AgriKnowledge – Agricultural Research and Innovation Explorer
+
+A web application that helps farmers, agribusiness owners, and agricultural entrepreneurs discover research publications and information about agricultural technologies, production methods, and innovations.
+
+Third-party APIs:
+- OpenAlex API – provides searchable scholarly works, authors, institutions, and research topics.
+- Crossref REST API – provides scholarly publication metadata, including titles, authors, publication dates, and DOI information.
