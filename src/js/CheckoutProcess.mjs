@@ -1,111 +1,112 @@
-import { alertMessage, getLocalStorage } from './utils.mjs';
-import ExternalServices from './ExternalServices.mjs';
 
+import { getLocalStorage } from "./utils.mjs";
+import ExternalServices from "./ExternalServices.mjs";
+
+// Convert form data into a JSON object
 function formDataToJSON(formElement) {
-  return Object.fromEntries(new FormData(formElement).entries());
+  const formData = new FormData(formElement);
+  const convertedJSON = {};
+
+  formData.forEach((value, key) => {
+    convertedJSON[key] = value;
+  });
+
+  return convertedJSON;
 }
 
 export default class CheckoutProcess {
-  constructor(
-    storageKey,
-    baseUrl = '/',
-    serverUrl = 'https://wdd330-backend-osp8.onrender.com/',
-  ) {
-    this.storageKey = storageKey;
-    this.baseUrl = baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`;
-    this.externalServices = new ExternalServices(serverUrl);
-    this.items = [];
+  constructor(key, outputSelector) {
+    this.key = key;
+    this.outputSelector = outputSelector;
+    this.list = [];
     this.itemTotal = 0;
-    this.tax = 0;
     this.shipping = 0;
+    this.tax = 0;
     this.orderTotal = 0;
+    this.externalServices = new ExternalServices();
   }
 
   init() {
-    const storedCart = getLocalStorage(this.storageKey);
-    this.items = Array.isArray(storedCart)
-      ? storedCart
-      : storedCart
-        ? [storedCart]
-        : [];
-
-    this.itemTotal = Number(
-      this.items
-        .reduce((total, item) => total + Number(item.FinalPrice), 0)
-        .toFixed(2),
-    );
-    this.tax = Number((this.itemTotal * 0.06).toFixed(2));
-    this.shipping = this.items.length ? 10 + (this.items.length - 1) * 2 : 0;
-    this.orderTotal = Number(
-      (this.itemTotal + this.tax + this.shipping).toFixed(2),
-    );
-    this.renderTotals();
-
-    const form = document.getElementById('checkout-form');
-    const submitButton = form.querySelector('button[type="submit"]');
-    if (this.items.length === 0) {
-      submitButton.disabled = true;
-      alertMessage('Your cart is empty. Add an item before checking out.');
-      return;
-    }
-
-    form.addEventListener('submit', async (event) => {
-      event.preventDefault();
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
-
-      submitButton.disabled = true;
-      const completed = await this.checkout(form);
-      if (!completed) {
-        submitButton.disabled = false;
-      }
-    });
+    this.list = getLocalStorage(this.key) || [];
+    this.calculateItemSubTotal();
   }
 
-  renderTotals() {
-    document.getElementById('subtotal').textContent =
-      `$${this.itemTotal.toFixed(2)}`;
-    document.getElementById('tax').textContent = `$${this.tax.toFixed(2)}`;
-    document.getElementById('shipping').textContent =
-      `$${this.shipping.toFixed(2)}`;
-    document.getElementById('orderTotal').textContent =
-      `$${this.orderTotal.toFixed(2)}`;
+  calculateItemSubTotal() {
+    this.itemTotal = this.list.reduce(
+      (sum, item) => sum + item.FinalPrice,
+      0
+    );
+
+    const subtotal = document.querySelector(
+      `${this.outputSelector} #subtotal`
+    );
+
+    subtotal.innerText = `$${this.itemTotal.toFixed(2)}`;
+  }
+
+  calculateOrderTotal() {
+    // Calculate 6% tax
+    this.tax = this.itemTotal * 0.06;
+
+    // Calculate shipping
+    this.shipping = this.list.length > 0
+      ? 10 + (this.list.length - 1) * 2
+      : 0;
+
+    // Calculate final order total
+    this.orderTotal =
+      this.itemTotal + this.tax + this.shipping;
+
+    // Display the totals
+    this.displayOrderTotals();
+  }
+
+  displayOrderTotals() {
+    const tax = document.querySelector(
+      `${this.outputSelector} #tax`
+    );
+
+    const shipping = document.querySelector(
+      `${this.outputSelector} #shipping`
+    );
+
+    const orderTotal = document.querySelector(
+      `${this.outputSelector} #orderTotal`
+    );
+
+    tax.innerText = `$${this.tax.toFixed(2)}`;
+    shipping.innerText = `$${this.shipping.toFixed(2)}`;
+    orderTotal.innerText = `$${this.orderTotal.toFixed(2)}`;
   }
 
   packageItems() {
-    return this.items.map((item) => ({
-      id: item.Id,
-      name: item.Name,
-      price: item.FinalPrice,
-      quantity: 1,
-    }));
+    return this.list.map((item) => {
+      return {
+        id: item.Id,
+        name: item.Name,
+        price: item.FinalPrice,
+        quantity: 1
+      };
+    });
   }
 
   async checkout(form) {
-    const order = {
-      ...formDataToJSON(form),
-      orderDate: new Date().toISOString(),
-      items: this.packageItems(),
-      orderTotal: this.orderTotal,
-      shipping: this.shipping,
-      tax: this.tax,
-    };
+  const order = formDataToJSON(form);
 
-    try {
-      await this.externalServices.checkout(order);
-      localStorage.removeItem(this.storageKey);
-      window.location.href = `${this.baseUrl}checkout/success.html`;
-      return true;
-    } catch (error) {
-      console.error('Unable to complete checkout:', error);
-      alertMessage(
-        error instanceof Error
-          ? error.message
-          : `Checkout failed: ${JSON.stringify(error)}`,
-      );
-      return false;
-    }
-  }
+  order.orderDate = new Date().toISOString();
+  order.items = this.packageItems();
+  order.orderTotal = this.orderTotal;
+  order.shipping = this.shipping;
+  order.tax = this.tax;
+
+  const response =
+    await this.externalServices.checkout(order);
+
+  localStorage.removeItem(this.key);
+
+  window.location.href =
+    "/checkout/success.html";
+
+  return response;
+}
 }

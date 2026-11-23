@@ -53,6 +53,16 @@ export default class ShoppingCart {
       'afterbegin',
       true,
     );
+    const total = cartItems.reduce(
+  (sum, item) => sum + Number(item.FinalPrice),
+  0,
+);
+
+const cartTotal = document.getElementById('cart-total');
+
+if (cartTotal) {
+  cartTotal.textContent = total.toFixed(2);
+}
 
     this.listElement
       .querySelectorAll('.cart-card__image img')

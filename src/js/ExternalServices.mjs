@@ -1,26 +1,52 @@
-const defaultBaseURL = 'https://wdd330-backend-osp8.onrender.com/';
 
-class ServiceError extends Error {
-  constructor(responseBody, status) {
-    super(`Checkout failed (${status}): ${JSON.stringify(responseBody)}`);
-    this.name = 'servicesError';
-    this.responseBody = responseBody;
-    this.status = status;
-  }
-}
+const defaultBaseURL = 'https://wdd330-backend-osp8.onrender.com/';
 
 async function convertToJson(response) {
   const jsonResponse = await response.json();
-  if (!response.ok) {
-    throw new ServiceError(jsonResponse, response.status);
+
+  if (response.ok) {
+    return jsonResponse;
   }
-  return jsonResponse;
+
+  throw {
+    name: "servicesError",
+    message: jsonResponse,
+  };
 }
+
 
 export default class ExternalServices {
   constructor(baseURL = defaultBaseURL) {
     const apiURL = baseURL || defaultBaseURL;
     this.baseURL = apiURL.endsWith('/') ? apiURL : `${apiURL}/`;
+  }
+
+  async getData(category) {
+    const response = await fetch(
+      `${this.baseURL}products/search/${encodeURIComponent(category)}`,
+    );
+
+    const data = await convertToJson(response);
+
+    if (!Array.isArray(data.Result)) {
+      throw new Error(`No products found for ${category}.`);
+    }
+
+    return data.Result;
+  }
+
+  async findProductById(id) {
+    const response = await fetch(
+      `${this.baseURL}product/${encodeURIComponent(id.toLowerCase())}/`,
+    );
+
+    const data = await convertToJson(response);
+
+    if (!data.Result) {
+      throw new Error(`No product found with ID ${id}.`);
+    }
+
+    return data.Result;
   }
 
   async checkout(order) {
@@ -32,6 +58,15 @@ export default class ExternalServices {
       body: JSON.stringify(order),
     });
 
-    return convertToJson(response);
+    const data = await response.json();
+
+    if (!response.ok) {
+      console.error('Backend error details:', data);
+      throw new Error(
+        `Checkout failed (${response.status}): ${JSON.stringify(data)}`,
+      );
+    }
+
+    return data;
   }
 }
