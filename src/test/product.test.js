@@ -83,7 +83,7 @@ describe('ProductData API', () => {
 		);
 	});
 
-	it('fetches a product by ID and reports an empty API result', async () => {
+	it('preserves product ID casing when fetching and reports an empty API result', async () => {
 		const product = { Id: '20CXG' };
 		const fetchMock = jest.spyOn(global, 'fetch');
 		fetchMock.mockResolvedValueOnce({
@@ -94,7 +94,7 @@ describe('ProductData API', () => {
 
 		await expect(dataSource.findProductById('20CXG')).resolves.toBe(product);
 		expect(fetchMock).toHaveBeenCalledWith(
-			'https://api.example.test/product/20cxg/',
+			'https://api.example.test/product/20CXG/',
 		);
 
 		fetchMock.mockResolvedValueOnce({

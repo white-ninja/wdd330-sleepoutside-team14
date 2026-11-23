@@ -19,6 +19,7 @@ export default defineConfig({
         main: resolve(projectDirectory, 'src/index.html'),
         cart: resolve(projectDirectory, 'src/cart/index.html'),
         checkout: resolve(projectDirectory, 'src/checkout/index.html'),
+        checkoutSuccess: resolve(projectDirectory, 'src/checkout/success.html'),
         product: resolve(projectDirectory, 'src/product_pages/index.html'),
         productListing: resolve(
           projectDirectory,
