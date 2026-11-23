@@ -62,9 +62,12 @@ export default class ExternalServices {
 
     if (!response.ok) {
       console.error('Backend error details:', data);
-      throw new Error(
-        `Checkout failed (${response.status}): ${JSON.stringify(data)}`,
-      );
+      throw {
+        name: 'servicesError',
+        message: `Checkout failed (${response.status}): ${JSON.stringify(data)}`,
+        responseBody: data,
+        status: response.status,
+      };
     }
 
     return data;
