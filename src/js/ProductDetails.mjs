@@ -28,11 +28,14 @@ export default class ProductDetails {
 
   renderProductDetails() {
     const product = this.product;
-    const discount =
-  product.ListPrice - product.FinalPrice;
+    const originalPrice =
+  product.SuggestedRetailPrice;
+
+const discount =
+  originalPrice - product.FinalPrice;
 
 const discountPercent =
-  ((discount / product.ListPrice) * 100).toFixed(0);
+  ((discount / originalPrice) * 100).toFixed(0);
 
     document.querySelector(".product-detail").innerHTML = `
       <img src="${product.Image}" alt="${product.Name}">
@@ -42,10 +45,16 @@ const discountPercent =
   $${product.FinalPrice}
 </p>
 
-<p class="discount-badge">
-  Save $${discount.toFixed(2)}
-  (${discountPercent}% OFF)
-</p>
+${
+  discount > 0
+    ? `
+      <p class="discount-badge">
+        Save $${discount.toFixed(2)}
+        (${discountPercent}% OFF)
+      </p>
+    `
+    : ""
+}
       <p>${product.DescriptionHtmlSimple}</p>
       <button id="addToCart">Add to Cart</button>
     `;
