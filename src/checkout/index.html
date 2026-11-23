@@ -1,91 +1,107 @@
 <!doctype html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sleep Outside | Checkout</title>
+    <link rel="stylesheet" href="/css/style.css" />
+    <script src="../js/checkout.js" type="module"></script>
+  </head>
+  <body>
+    <header class="divider" id="main-header"></header>
+    <main class="divider">
+      <section class="checkout-page">
+        <h1>Review &amp; Place Your Order</h1>
+        <form id="checkout-form">
+          <fieldset>
+            <legend>Customer Information</legend>
+            <label>
+              First Name
+              <input name="fname" type="text" autocomplete="given-name" required />
+            </label>
+            <label>
+              Last Name
+              <input name="lname" type="text" autocomplete="family-name" required />
+            </label>
+          </fieldset>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sleep Outside | Checkout</title>
-  <link rel="stylesheet" href="/css/style.css" />
-</head>
+          <fieldset>
+            <legend>Shipping Address</legend>
+            <label>
+              Street Address
+              <input name="street" type="text" autocomplete="street-address" required />
+            </label>
+            <label>
+              City
+              <input name="city" type="text" autocomplete="address-level2" required />
+            </label>
+            <label>
+              State / Province / Region
+              <input name="state" type="text" autocomplete="address-level1" required />
+            </label>
+            <label>
+              Postal / ZIP Code
+              <input name="zip" type="text" autocomplete="postal-code" required />
+            </label>
+          </fieldset>
 
-<body>
-  <header class="divider" id="main-header"></header>
+          <fieldset>
+            <legend>Payment Information</legend>
+            <p class="payment-notice" role="note">
+              This coursework checkout is a demo, not a payment processor. Do
+              not enter real card or security-code details.
+            </p>
+            <label>
+              Demo Card Number
+              <input
+                name="cardNumber"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                pattern="[0-9]{13,19}"
+                title="Enter 13 to 19 digits using demo card data only."
+                required
+              />
+            </label>
+            <label>
+              Demo Expiration Date
+              <input
+                name="expiration"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                placeholder="MM/YY"
+                pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+                title="Enter a demo expiration date as MM/YY."
+                required
+              />
+            </label>
+            <label>
+              Demo Security Code
+              <input
+                name="code"
+                type="text"
+                inputmode="numeric"
+                autocomplete="off"
+                pattern="[0-9]{3,4}"
+                title="Enter a 3- or 4-digit demo security code."
+                required
+              />
+            </label>
+          </fieldset>
 
-  <main class="divider">
-    <h1>Checkout</h1>
+          <section class="checkout order-summary" aria-labelledby="summary-heading">
+            <h2 id="summary-heading">Order Summary</h2>
+            <p>Subtotal: <span id="subtotal">$0.00</span></p>
+            <p>Tax: <span id="tax">$0.00</span></p>
+            <p>Shipping: <span id="shipping">$0.00</span></p>
+            <p>Order Total: <span id="orderTotal">$0.00</span></p>
+          </section>
 
-    <form id="checkout-form">
-      <fieldset>
-        <legend>Customer Information</legend>
-
-        <label>
-          First Name
-          <input type="text" name="fname" required />
-        </label>
-
-        <label>
-          Last Name
-          <input type="text" name="lname" required />
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Address</legend>
-
-        <label>
-          Street Address
-          <input type="text" name="street" required />
-        </label>
-
-        <label>
-          City
-          <input type="text" name="city" required />
-        </label>
-
-        <label>
-          State
-          <input type="text" name="state" required />
-        </label>
-
-        <label>
-          Zip Code
-          <input type="text" name="zip" required />
-        </label>
-      </fieldset>
-
-      <fieldset>
-        <legend>Payment</legend>
-
-        <label>
-          Credit Card Number
-          <input type="text" name="cardNumber" inputmode="numeric" autocomplete="cc-number" required />
-        </label>
-
-        <label>
-          Expiration Date
-          <input type="text" name="expiration" placeholder="MM/YY" autocomplete="cc-exp" required />
-        </label>
-
-        <label>
-          Security Code
-          <input type="text" name="code" inputmode="numeric" autocomplete="cc-csc" required />
-        </label>
-      </fieldset>
-
-      <button type="submit">Checkout</button>
-    </form>
-
-    <section class="checkout order-summary">
-      <h2>Order Summary</h2>
-      <p>Subtotal: <span id="subtotal">$0.00</span></p>
-      <p>Tax: <span id="tax">$0.00</span></p>
-      <p>Shipping: <span id="shipping">$0.00</span></p>
-      <p>Order Total: <span id="orderTotal">$0.00</span></p>
-    </section>
-  </main>
-
-  <footer id="main-footer"></footer>
-
-  <script src="../js/checkout.js" type="module"></script>
-</body>
+          <button type="submit">Place Order</button>
+        </form>
+      </section>
+    </main>
+    <footer id="main-footer"></footer>
+  </body>
 </html>

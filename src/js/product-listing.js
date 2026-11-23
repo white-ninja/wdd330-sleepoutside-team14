@@ -8,6 +8,8 @@ loadHeaderFooter(import.meta.env.BASE_URL);
 
 new Alert(qs('main'), import.meta.env.BASE_URL)
   .init()
+  // Keep JSON or network failures visible to developers.
+  // eslint-disable-next-line no-console
   .catch((error) => console.error('Unable to load alerts:', error));
 
 const categoryLabels = {

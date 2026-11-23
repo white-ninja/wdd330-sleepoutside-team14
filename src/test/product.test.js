@@ -5,9 +5,17 @@ import {
 	renderWithTemplate,
 } from '../js/utils.mjs';
 import ProductData from '../js/ProductData.mjs';
+import ProductDetails from '../js/ProductDetails.mjs';
+
+const originalDocument = global.document;
 
 afterEach(() => {
 	jest.restoreAllMocks();
+	if (originalDocument === undefined) {
+		delete global.document;
+	} else {
+		global.document = originalDocument;
+	}
 });
 
 describe('getImageUrl', () => {
@@ -104,5 +112,58 @@ describe('ProductData API', () => {
 		await expect(dataSource.findProductById('unknown')).rejects.toThrow(
 			'returned no product',
 		);
+	});
+});
+
+describe('ProductDetails', () => {
+	it('renders product data returned by the case-preserving lookup', async () => {
+		const product = {
+			Id: '15KKP',
+			Name: 'Kelty Sleeping Bag',
+			NameWithoutBrand: 'Sleeping Bag',
+			Brand: { Name: 'Kelty' },
+			Images: { PrimaryLarge: 'https://example.test/product.jpg' },
+			FinalPrice: 99.99,
+			Colors: [{ ColorName: 'Blue' }],
+			DescriptionHtmlSimple: 'Warm and lightweight.',
+		};
+		const elements = new Map([
+			['addToCart', { addEventListener: jest.fn(), disabled: false }],
+			['productBrand', { textContent: '' }],
+			['productName', { textContent: '' }],
+			[
+				'productImage',
+				{
+					addEventListener: jest.fn(),
+					removeAttribute: jest.fn(),
+					hidden: false,
+				},
+			],
+			['productFinalPrice', { textContent: '' }],
+			['productColorName', { textContent: '' }],
+			['productDescriptionHtmlSimple', { innerHTML: '' }],
+		]);
+		global.document = {
+			title: '',
+			getElementById: jest.fn((id) => elements.get(id)),
+		};
+		const dataSource = {
+			findProductById: jest.fn().mockResolvedValue(product),
+		};
+
+		await new ProductDetails('15KKP', dataSource).init();
+
+		expect(dataSource.findProductById).toHaveBeenCalledWith('15KKP');
+		expect(elements.get('productBrand').textContent).toBe('Kelty');
+		expect(elements.get('productName').textContent).toBe('Sleeping Bag');
+		expect(elements.get('productFinalPrice').textContent).toBe('$99.99');
+		expect(elements.get('productColorName').textContent).toBe('Blue');
+		expect(elements.get('productDescriptionHtmlSimple').innerHTML).toBe(
+			'Warm and lightweight.',
+		);
+		expect(elements.get('productImage').src).toBe(
+			'https://example.test/product.jpg',
+		);
+		expect(elements.get('addToCart').disabled).toBe(false);
 	});
 });
