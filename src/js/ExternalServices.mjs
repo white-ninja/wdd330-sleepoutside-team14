@@ -1,18 +1,12 @@
 import ProductData from './ProductData.mjs';
 
-const defaultBaseURL = 'https://wdd330-backend-osp8.onrender.com/';
-
-async function convertToJson(response) {
-  const jsonResponse = await response.json();
-
-  if (response.ok) {
-    return jsonResponse;
+class ServiceError extends Error {
+  constructor(responseBody, status) {
+    super(`Checkout failed (${status}): ${JSON.stringify(responseBody)}`);
+    this.name = 'servicesError';
+    this.responseBody = responseBody;
+    this.status = status;
   }
-
-  throw {
-    name: "servicesError",
-    message: jsonResponse,
-  };
 }
 
 export default class ExternalServices extends ProductData {
@@ -25,15 +19,11 @@ export default class ExternalServices extends ProductData {
       body: JSON.stringify(order),
     });
 
-    const data = await response.json();
-
+    const responseBody = await response.json();
     if (!response.ok) {
-      console.error('Backend error details:', data);
-      throw new Error(
-        `Checkout failed (${response.status}): ${JSON.stringify(data)}`,
-      );
+      throw new ServiceError(responseBody, response.status);
     }
 
-    return data;
+    return responseBody;
   }
 }

@@ -105,29 +105,32 @@ export function getParam(param) {
   return urlParams.get(param);
 }
 export function alertMessage(message, scroll = true) {
+  const main = qs('main');
+  if (!main) {
+    throw new Error('Cannot display an alert because the page has no main element.');
+  }
+
   const alert = document.createElement("div");
-
   alert.classList.add("alert-message");
+  alert.setAttribute('role', 'alert');
+  alert.setAttribute('aria-live', 'assertive');
 
-  alert.innerHTML = `
-    <p>${message}</p>
-    <button class="close-alert">X</button>
-  `;
+  const alertText = document.createElement('p');
+  alertText.textContent = message;
 
-  alert.addEventListener("click", function (e) {
-    if (
-      e.target.classList.contains("close-alert")
-    ) {
-      this.remove();
-    }
-  });
+  const closeButton = document.createElement('button');
+  closeButton.type = 'button';
+  closeButton.classList.add('close-alert');
+  closeButton.setAttribute('aria-label', 'Dismiss message');
+  closeButton.textContent = '×';
+  closeButton.addEventListener('click', () => alert.remove());
 
-  const main =
-    document.querySelector("main");
-
+  alert.append(alertText, closeButton);
   main.prepend(alert);
 
   if (scroll) {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+
+  return alert;
 }

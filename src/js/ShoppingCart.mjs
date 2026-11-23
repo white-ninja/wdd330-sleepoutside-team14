@@ -9,15 +9,16 @@ function cartItemTemplate(item) {
   const imageUrl =
     item.Images?.PrimaryMedium ||
     getImageUrl(item.Image, import.meta.env.BASE_URL);
+  const productUrl = `../product_pages/index.html?product=${encodeURIComponent(item.Id)}`;
   const imageContent = imageUrl
     ? `<img src="${imageUrl}" alt="${item.Name}" />`
     : '<span>Image unavailable</span>';
 
   return `<li class="cart-card divider">
-  <a href="#" class="cart-card__image">
+  <a href="${productUrl}" class="cart-card__image">
     ${imageContent}
   </a>
-  <a href="#">
+  <a href="${productUrl}">
     <h2 class="card__name">${item.Name}</h2>
   </a>
   <p class="cart-card__color">${item.Colors[0].ColorName}</p>
@@ -54,15 +55,13 @@ export default class ShoppingCart {
       true,
     );
     const total = cartItems.reduce(
-  (sum, item) => sum + Number(item.FinalPrice),
-  0,
-);
-
-const cartTotal = document.getElementById('cart-total');
-
-if (cartTotal) {
-  cartTotal.textContent = total.toFixed(2);
-}
+      (sum, item) => sum + Number(item.FinalPrice),
+      0,
+    );
+    const cartTotal = document.getElementById('cart-total');
+    if (cartTotal) {
+      cartTotal.textContent = total.toFixed(2);
+    }
 
     this.listElement
       .querySelectorAll('.cart-card__image img')
