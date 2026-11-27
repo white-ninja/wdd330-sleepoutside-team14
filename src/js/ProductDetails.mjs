@@ -65,7 +65,27 @@ export default class ProductDetails {
       this.product.NameWithoutBrand;
 
     const image = document.getElementById('productImage');
-    const imageUrl = this.product.Images?.PrimaryLarge;
+    const images = this.product.Images || {};
+
+    const imageUrl =
+      images.PrimaryLarge ||
+      images.PrimaryMedium ||
+      images.PrimaryExtraLarge ||
+      images.PrimarySmall;
+
+    const responsiveImages = [
+      [images.PrimarySmall, 80],
+      [images.PrimaryMedium, 160],
+      [images.PrimaryLarge, 320],
+      [images.PrimaryExtraLarge, 600],
+    ];
+
+    image.srcset = responsiveImages
+      .filter(([url]) => url)
+      .map(([url, width]) => `${url} ${width}w`)
+      .join(', ');
+
+    image.sizes = '(max-width: 500px) 90vw, 468px';
     image.addEventListener(
       'error',
       () => {
