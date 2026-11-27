@@ -1,14 +1,37 @@
 import { getImageUrl, renderListWithTemplate } from './utils.mjs';
 
 function productCardTemplate(product) {
-  const imageUrl = product.Images?.PrimaryMedium;
+  const images = product.Images || {};
+
+  const imageUrl =
+    images.PrimaryMedium ||
+    images.PrimarySmall ||
+    images.PrimaryLarge ||
+    images.PrimaryExtraLarge;
+
+  const responsiveImages = [
+    [images.PrimarySmall, 80],
+    [images.PrimaryMedium, 160],
+    [images.PrimaryLarge, 320],
+    [images.PrimaryExtraLarge, 600],
+  ]
+    .filter(([url]) => url)
+    .map(([url, width]) => `${url} ${width}w`)
+    .join(', ');
+
   const fallbackImageUrl = getImageUrl(
     '/images/noun_Tent_2517.svg',
     import.meta.env.BASE_URL,
   );
+
   return `<li class="product-card">
     <a href="../product_pages/index.html?product=${encodeURIComponent(product.Id)}">
-      <img src="${imageUrl || fallbackImageUrl}" alt="${product.Name}" />
+      <img
+        src="${imageUrl || fallbackImageUrl}"
+        srcset="${responsiveImages}"
+        sizes="(max-width: 500px) 45vw, 250px"
+        alt="${product.Name}"
+      />
       <h3 class="card__brand">${product.Brand.Name}</h3>
       <h2 class="card__name">${product.NameWithoutBrand}</h2>
       <p class="product-card__price">$${product.FinalPrice}</p>
@@ -47,6 +70,8 @@ export default class ProductList {
       image.addEventListener(
         'error',
         () => {
+          image.removeAttribute('srcset');
+          image.removeAttribute('sizes');
           image.src = getImageUrl(
             '/images/noun_Tent_2517.svg',
             import.meta.env.BASE_URL,

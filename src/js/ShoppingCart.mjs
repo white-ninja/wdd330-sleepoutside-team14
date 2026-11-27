@@ -6,12 +6,34 @@ import {
 } from './utils.mjs';
 
 function cartItemTemplate(item) {
+  const images = item.Images || {};
+
   const imageUrl =
-    item.Images?.PrimaryMedium ||
+    images.PrimaryMedium ||
+    images.PrimarySmall ||
+    images.PrimaryLarge ||
+    images.PrimaryExtraLarge ||
     getImageUrl(item.Image, import.meta.env.BASE_URL);
+
+  const responsiveImages = [
+    [images.PrimarySmall, 80],
+    [images.PrimaryMedium, 160],
+    [images.PrimaryLarge, 320],
+    [images.PrimaryExtraLarge, 600],
+  ]
+    .filter(([url]) => url)
+    .map(([url, width]) => `${url} ${width}w`)
+    .join(', ');
+
   const productUrl = `../product_pages/index.html?product=${encodeURIComponent(item.Id)}`;
+
   const imageContent = imageUrl
-    ? `<img src="${imageUrl}" alt="${item.Name}" />`
+    ? `<img
+        src="${imageUrl}"
+        srcset="${responsiveImages}"
+        sizes="(max-width: 500px) 80px, 160px"
+        alt="${item.Name}"
+      />`
     : '<span>Image unavailable</span>';
 
   return `<li class="cart-card divider">
@@ -47,6 +69,7 @@ export default class ShoppingCart {
       : storedCart
         ? [storedCart]
         : [];
+
     renderListWithTemplate(
       cartItemTemplate,
       this.listElement,
@@ -54,11 +77,14 @@ export default class ShoppingCart {
       'afterbegin',
       true,
     );
+
     const total = cartItems.reduce(
       (sum, item) => sum + Number(item.FinalPrice),
       0,
     );
+
     const cartTotal = document.getElementById('cart-total');
+
     if (cartTotal) {
       cartTotal.textContent = total.toFixed(2);
     }
@@ -78,6 +104,7 @@ export default class ShoppingCart {
 
   handleRemove(event) {
     const button = event.target.closest('.cart-card__remove');
+
     if (!button || !this.listElement.contains(button)) {
       return;
     }
@@ -88,6 +115,7 @@ export default class ShoppingCart {
       : storedCart
         ? [storedCart]
         : [];
+
     const itemIndex = cartItems.findIndex(
       (item) => String(item.Id) === button.dataset.id,
     );
